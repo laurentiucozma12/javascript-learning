@@ -1,0 +1,13 @@
+body {
+    background-color: #60aac7;
+    background-color: #494949; }
+main {
+    display: flex;
+    justify-content: center; }
+.canvas-container {
+    max-width: 70vw; }
+    @media only screen and (max-width: 1024px) {
+        .canvas-container {
+            min-width: 90vw; } }
+.canvas-container canvas {    
+    background-color: #60aac7; }
