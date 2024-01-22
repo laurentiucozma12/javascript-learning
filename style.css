@@ -1,7 +1,6 @@
 body {
-    background-color: #60aac7;
     background-color: #494949; }
-main {
+/* main {
     display: flex;
     justify-content: center; }
 .canvas-container {
@@ -10,4 +9,4 @@ main {
         .canvas-container {
             min-width: 90vw; } }
 .canvas-container canvas {    
-    background-color: #60aac7; }
+    background-color: #60aac7; } */
