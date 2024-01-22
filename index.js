@@ -35,26 +35,16 @@ class Sprite {
 }
 
 const player = new Sprite({
-    position: {
-        x: 0,
-        y: 0
-    },
-    velocity: {
-        x: 0,
-        y: 0,
-    }
+    position: { x: 0, y: 0 },
+    velocity: { x: 0, y: 0 },
 });
 
+
 const enemy = new Sprite({
-    position: {
-        x: 400,
-        y: 100
-    },
-    velocity: {
-        x: 0,
-        y: 0,
-    }
+    position: { x: 400, y: 100 },
+    velocity: { x: 0, y: 0 },
 });
+
 
 function animate() {
     window.requestAnimationFrame(animate);
