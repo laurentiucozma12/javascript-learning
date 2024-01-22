@@ -39,12 +39,10 @@ const player = new Sprite({
     velocity: { x: 0, y: 0 },
 });
 
-
 const enemy = new Sprite({
     position: { x: 400, y: 100 },
     velocity: { x: 0, y: 0 },
 });
-
 
 function animate() {
     window.requestAnimationFrame(animate);
