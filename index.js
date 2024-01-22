@@ -5,19 +5,6 @@ const c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
-// Function to update canvas size when the window is resized GOTTA TEST IT
-// function updateCanvasSize() {
-//     const parentWidth = canvas.parentElement.clientWidth;
-//     const calculatedHeight = (9 / 16) * parentWidth;
-
-//     // Set the canvas size
-//     canvas.width = parentWidth;
-//     canvas.height = calculatedHeight;
-// }
-
-// Call the function to set initial size
-// updateCanvasSize();
-
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.2;
