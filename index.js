@@ -1,55 +1,53 @@
-const canvas = document.querySelector('canvas');
-const c = canvas.getContext('2d');
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext("2d");
 
-// 16x9 ratio
-canvas.width = 1024;
-canvas.height = 576;
+// var canvasWidth = window.innerWidth;
+// var canvasHeight = window.innerHeight;
 
-c.fillRect(0, 0, canvas.width, canvas.height);
+canvas.width = 500;
+canvas.height = 280;
+canvas.style.background = '#ff8';
 
-const gravity = 0.2;
-
-class Sprite {
-    constructor({position, velocity}) {
-        this.position = position;
-        this.velocity = velocity;
-        this.height = 150;
+class Circle {
+    constructor(x, y, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
     }
 
-    draw() {
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, 50, this.height)
-    }
-    
-    update() {
-        this.draw();
-        
-        this.position.y += this.velocity.y;
-
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-            this.velocity.y = 0;
-        } else {
-            this.velocity.y += gravity;
-        }
+    draw(context) {
+        context.beginPath();
+        context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        context.stroke();
+        context.closePath();
     }
 }
 
-const player = new Sprite({
-    position: { x: 0, y: 0 },
-    velocity: { x: 0, y: 0 },
-});
+let circle1 = new Circle(75, 75, 50, 'red');
+circle1.draw(context);
 
-const enemy = new Sprite({
-    position: { x: 400, y: 100 },
-    velocity: { x: 0, y: 0 },
-});
+class Square {
+    constructor(x, y, width, color) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.color = color;
+    }
 
-function animate() {
-    window.requestAnimationFrame(animate);
-    c.fillStyle = 'black';
-    c.fillRect(0, 0, canvas.width, canvas.height);
-    player.update();
-    enemy.update();
+    draw(context) {
+        context.fillStyle = `${this.color}`;
+        context.fillRect(this.x, this.y, this.width, this.width, this.color);
+    }
 }
 
-animate();
+let square1 = new Square(150, 150, 10, 'blue');
+square1.draw(context);
+
+
+
+
+
+
+
+
