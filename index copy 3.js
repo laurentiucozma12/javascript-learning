@@ -39,28 +39,23 @@ class Circle {
     }
 
     update() {
-        this.text = hitCounter;
         context.clearRect(0, 0, canvasWidth, canvasHeight);
         this.draw(context);
 
         if ((this.x + this.radius) > canvasWidth) {
             this.dx = -this.dx;
-            hitCounter++;
         }
 
         if ((this.y + this.radius) > canvasHeight) {
             this.dy = -this.dy;
-            hitCounter++;
         }
 
         if ((this.x - this.radius) < 0) {
             this.dx = -this.dx;
-            hitCounter++;
         }
 
         if ((this.y - this.radius) < 0) {
             this.dy = -this.dy;
-            hitCounter++;
         }
         
         this.x += this.dx;
@@ -68,11 +63,11 @@ class Circle {
     }
 }
 
-let hitCounter = 0;
+let circle_counter = 1;
 let random_x = Math.random() * canvasWidth;
 let random_y = Math.random() * canvasHeight;
 
-let my_circle = new Circle(100, 100, 50, 'black', hitCounter, 10);
+let my_circle = new Circle(random_x, random_y, 50, 'black', circle_counter, 10);
 
 my_circle.draw(context);
 
