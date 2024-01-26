@@ -29,6 +29,6 @@ function createImage(context, imagePath, x, y, width, height) {
         context.drawImage(myImage, x, y, width, height);
     }
 }
-
+// a
 let image = new Image('logo.png', 50, 50, 16 * 20, 9 * 20);
 createImage(context, image.imagePath, image.x, image.y, image.width, image.height);
