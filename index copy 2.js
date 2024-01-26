@@ -1,7 +1,8 @@
-const canvas = document.getElementById("canvas");
-const context = canvas.getContext("2d");
+// Create Canvas OBJECTS with LOOPS | HTML5 Canvas JavaScript Tutorial [#6]
+// https://www.youtube.com/watch?v=3ofgt7lHcrI&list=PLN0tvDAN1yvSNbkHAwPzJ5O4pP_e2vyme&index=6
 
-canvas.style.background = '#ff8';
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext("2d");
 
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight;
@@ -9,12 +10,17 @@ var canvasHeight = window.innerHeight;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
-class Rectangle {
-    constructor(x, y, width, height, speed) {
+// canvas.width = 500;
+// canvas.height = 280;
+canvas.style.background = '#ff8';
+
+class Circle {
+    constructor(x, y, radius, color, text, speed) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.radius = radius;
+        this.color = color;
+        this.text = text;
         this.speed = speed;
         this.dx = 1 * this.speed;
         this.dy = 1 * this.speed;
@@ -22,13 +28,20 @@ class Rectangle {
 
     draw(context) {
         context.beginPath();
-        context.rect(this.x, this.y, this.width, this.height);
+
+        context.strokeStyle = this.color;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.font = "20px Arial";
+        context.fillText(this.text, this.x, this.y);
+        
+        context.lineWidth = 5;
+        context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
         context.stroke();
         context.closePath();
     }
 
     update() {
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
         this.draw(context);
 
         if ((this.x + this.radius) > canvasWidth) {
@@ -46,53 +59,42 @@ class Rectangle {
         if ((this.y - this.radius) < 0) {
             this.dy = -this.dy;
         }
-
+        
         this.x += this.dx;
         this.y += this.dy;
     }
 }
 
-let square1 = new Rectangle(300, 50, 100, 100, 1);
-square1.draw(context);
-
-let update = function() {
-    requestAnimationFrame(update);
-    square1.update();
+let getDistance = function(x1, y1, x2, y2) {
+    var result = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    return result;
 }
 
-update();
+let all_circles = [];
 
-class Circle {
-    constructor(x, y, radius, startAngle, endAngle, ) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.startAngle = startAngle;
-        this.endAngle = endAngle;
-    }
-
-    draw(context) {
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, false);
-        context.stroke();
-        context.closePath();
-    }
+let randomNumber = function(min, max) {
+    var result = Math.random() * (max - min) + min;
+    return result;
 }
 
-let rectangle1 = new Rectangle(300, 100, 200, 100);
-rectangle1.draw(context);
+for (let i = 0; i < 10; i++) {
 
-let rectangle2 = new Rectangle(100, 300, 100, 200);
-rectangle2.draw(context);
+    var radius = 100;
+    var random_x = randomNumber(radius, (canvasWidth - radius));
+    var random_y = randomNumber(radius, (canvasHeight - radius));
 
-let square2 = new Rectangle(400, 400, 100, 100);
-square2.draw(context);
+    let circle1 = new Circle(random_x, random_y, radius, 'black', "A", 1);
+    all_circles.push(circle1);
 
-let circle1 = new Circle(300, 300, 50, 0, 2 * Math.PI);
-circle1.draw(context);
+}
 
-let circle2 = new Circle(450, 300, 50, Math.PI, 2/4 * Math.PI);
-circle2.draw(context);
+let updateCircle = function() {
+    requestAnimationFrame(updateCircle);
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-let circle3 = new Circle(300, 450, 50, 0, 1.5 * Math.PI);
-circle3.draw(context);
+    all_circles.forEach(element => {
+        element.update();
+    });
+}
+
+updateCircle();

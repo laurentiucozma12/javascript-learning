@@ -1,3 +1,6 @@
+// HTML5 Canvas JavaScript Tutorial | Collision detection Canvas objects & elements interaction [#5]
+// https://www.youtube.com/watch?v=tCPcinx3h-g&list=PLN0tvDAN1yvSNbkHAwPzJ5O4pP_e2vyme&index=5
+
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext("2d");
 
@@ -39,28 +42,22 @@ class Circle {
     }
 
     update() {
-        this.text = hitCounter;
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
         this.draw(context);
 
         if ((this.x + this.radius) > canvasWidth) {
             this.dx = -this.dx;
-            hitCounter++;
         }
 
         if ((this.y + this.radius) > canvasHeight) {
             this.dy = -this.dy;
-            hitCounter++;
         }
 
         if ((this.x - this.radius) < 0) {
             this.dx = -this.dx;
-            hitCounter++;
         }
 
         if ((this.y - this.radius) < 0) {
             this.dy = -this.dy;
-            hitCounter++;
         }
         
         this.x += this.dx;
@@ -68,20 +65,34 @@ class Circle {
     }
 }
 
-let hitCounter = 0;
 let random_x = Math.random() * canvasWidth;
 let random_y = Math.random() * canvasHeight;
 
-let my_circle = new Circle(100, 100, 50, 'black', hitCounter, 5);
+let circle1 = new Circle(100, 100, 40, 'black', "A", 1);
+let circle2 = new Circle(400, 400, 100, 'black', "B", 0);
 
-my_circle.draw(context);
+circle1.draw(context);
+circle2.draw(context);
 
-let update = function() {
-    requestAnimationFrame(update);
-    my_circle.update();
+let getDistance = function(x1, y1, x2, y2) {
+    var result = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    return result;
 }
 
-update();
+let updateCircle = function() {
+    requestAnimationFrame(updateCircle);
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    circle1.update();
+    circle2.update();
+
+    if (getDistance(circle1.x, circle1.y, circle2.x, circle2.y) < circle2.radius + circle1.radius) {
+        circle2.color = "red";
+    } else {
+        circle2.color = "black";
+    }
+}
+
+updateCircle();
 
 // let createSprites = function(sprite) {
 //     sprite.draw(context);
@@ -91,8 +102,8 @@ update();
 //     let random_x = Math.random() * canvasWidth;
 //     let random_y = Math.random() * canvasHeight;
 
-//     let my_circle = new Circle(random_x, random_y, 50, 'black', i+1);
-//     all_circles.push(my_circle);
+//     let circle1 = new Circle(random_x, random_y, 50, 'black', i+1);
+//     all_circles.push(circle1);
 
 //     createSprites(all_circles[i]);
 //     circle_counter++;
