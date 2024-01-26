@@ -72,7 +72,7 @@ let hitCounter = 0;
 let random_x = Math.random() * canvasWidth;
 let random_y = Math.random() * canvasHeight;
 
-let my_circle = new Circle(100, 100, 50, 'black', hitCounter, 10);
+let my_circle = new Circle(100, 100, 50, 'black', hitCounter, 5);
 
 my_circle.draw(context);
 
