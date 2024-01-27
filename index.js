@@ -1,5 +1,5 @@
-// Canvas Object Interaction Events | HTML5 Canvas JavaScript Tutorial [#8]
-// https://www.youtube.com/watch?v=xbdJf9MRL7A&list=PLN0tvDAN1yvSNbkHAwPzJ5O4pP_e2vyme&index=8
+// CANVAS Creating Data Graphes & Diagrams | HTML5 Canvas JavaScript Tutorial [#9]
+// https://www.youtube.com/watch?v=A5ERsm08cf8&list=PLN0tvDAN1yvSNbkHAwPzJ5O4pP_e2vyme&index=9
 
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext("2d");
@@ -11,46 +11,41 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 canvas.style.background = '#ff8';
-class Circle {
-    constructor (x, y, radius, color) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.color = color;
-    }
 
-    draw(context) {
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        context.strokeStyle = 'grey';
-        context.lineWidth = 3;
-        context.fillStyle = this.color;
-        context.fill();
-        context.stroke();
-        context.closePath();
-    }
+const data = [
+    200,
+    150,
+    170,
+    100,
+    80,
+    50,
+    350,
+    200,
+    200,
+    230,
+];
 
-    changeColor(newColor) {
-       this.color = newColor;
-       this.draw(context);
-    }
+const startValue = data[0];
+const distance = canvas.width / data.length;
+const startPoint = 0;
 
-    clickCircle(xMouse, yMouse) {
-        const distance = Math.sqrt(Math.pow((xMouse - this.x), 2) + Math.pow((yMouse - this.y), 2));
-        if (distance > this.radius + context.lineWidth) {
-            this.changeColor('blue');
-        } else {
-            this.changeColor('green');
-        }
-    }
-}
+context.beginPath();
 
-let circle = new Circle(200, 200, 100, '#f52');
-circle.draw(context);
+context.lineWidth = 3;
+context.strokeStyle = '#f56';
 
-canvas.addEventListener('click', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    circle.clickCircle(x, y);
+context.moveTo(startPoint, startValue);
+data.forEach( (element, index) => {
+    const newDistance = startPoint + (distance * (index + 1));
+    context.lineTo(newDistance, element);
 });
+
+context.lineTo(canvas.width, canvas.height);
+context.lineTo(startPoint, canvas.height);
+context.lineTo(startPoint, startValue);
+
+context.fillStyle = 'gray';
+context.fill();
+
+context.stroke();
+context.closePath();
