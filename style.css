@@ -4,10 +4,11 @@ body {
     background-color: #962020; 
     background-color: #494949; }
 
-#myBox {
+.emoji {
     background-color: lightblue;
-    width: 200px;
-    height: 200px;
+    width: 195px;
+    height: 195px;
+    border: 5px solid black;
     font-size: 7.5rem;
     display: flex;
     justify-content: center;
